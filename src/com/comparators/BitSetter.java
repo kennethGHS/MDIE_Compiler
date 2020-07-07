@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 
 public class BitSetter {
-    public BitSet setImm(String operand) {
+    public static BitSet setImm(String operand) {
         operand.replace("[", "");
         try {
             int num = Integer.parseInt(operand);
@@ -15,7 +15,7 @@ public class BitSetter {
 
     }
 
-    public BitSet setReg(String operand) {
+    public static BitSet setReg(String operand) {
         try {
             operand.replace("[", "");
             switch (operand) {
@@ -97,7 +97,7 @@ public class BitSetter {
     }
 
 
-    public ArrayList<BitSet> setOperation(String operand) {
+    public static ArrayList<BitSet> setOperation(String operand) {
         BitSet instructBit = new BitSet(5);
         BitSet aluBit = new BitSet(3);
         try {
