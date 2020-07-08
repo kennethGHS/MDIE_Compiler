@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.BitSet;
 
 public class BitSetter {
+    /**
+     * PArses a Imm into a bitset
+     * @param operand
+     * @return
+     */
     public static BitSet setImm(String operand) {
         operand.replace("[", "");
         try {
@@ -15,6 +20,11 @@ public class BitSetter {
 
     }
 
+    /**
+     *
+     * @param operand
+     * @return
+     */
     public static BitSet setReg(String operand) {
         try {
             operand.replace("[", "");
@@ -96,7 +106,11 @@ public class BitSetter {
         return bits;
     }
 
-
+    /**
+     * creates the binary values for the operators and ALUop
+     * @param operand
+     * @return
+     */
     public static ArrayList<BitSet> setOperation(String operand) {
         BitSet instructBit = new BitSet(5);
         BitSet aluBit = new BitSet(3);

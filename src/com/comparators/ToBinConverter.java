@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.BitSet;
 
 public class ToBinConverter {
+    /**
+     * parses the instruction to a arraylist of BitSets, first it creates the instruction bitset,
+     * then tries to check if its a register, then a imm then a label, it appends the result
+     * @param parsedInstruction the parsed instruction in an arraylist
+     * @return the bitset containing all the binary numbers of the operands
+     */
     public static ArrayList<BitSet> getBitSet(ArrayList<String> parsedInstruction) {
         if (parsedInstruction == null) {
             return null;

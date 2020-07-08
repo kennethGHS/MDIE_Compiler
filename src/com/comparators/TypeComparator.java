@@ -1,6 +1,11 @@
 package com.comparators;
 
 public class TypeComparator {
+    /**
+     * get what kind of type the instructions belongs to
+     * @param operation
+     * @return
+     */
     public static int type(String operation) {
         switch (operation) {
             case "add":
