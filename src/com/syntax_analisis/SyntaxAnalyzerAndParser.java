@@ -18,7 +18,7 @@ public class SyntaxAnalyzerAndParser {
         if (sentence == null) {
             return null;
         }
-        int maxIndex = sentence.get(1).length();
+        int maxIndex = sentence.get(1).length() +1;
         toReturn.add(sentence.get(0));
         String toParse = sentence.get(1).replaceAll(" ", "");
         int i = 0;
@@ -86,12 +86,31 @@ public class SyntaxAnalyzerAndParser {
             isLabel=false;
             label="";
             i++;
+            if(isJumpOrCallOrBranch(line)){
+                new Instruction("stall",false,label,i);
+                i++;
+                new Instruction("stall",false,label,i);
+                i++;
+            }
         }
         for (Instruction inst : Instruction.instList){
             inst.setBitLine();
             inst.setBitSet();
         }
 
+    }
+
+    private static boolean isJumpOrCallOrBranch(String line) {
+        line = line.toLowerCase().trim();
+        String line2= "" + line.charAt(0)+line.charAt(1)+line.charAt(2);
+        String line3="" + line.charAt(0)+line.charAt(1);
+        String line4="" + line.charAt(0)+line.charAt(1)+line.charAt(2)+line.charAt(3);
+
+        if(line2.contains("jmp")||line3.contains("jr")||line4.contains("call")||line3.contains("be")||line2.contains("bgt") ){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**
@@ -102,7 +121,9 @@ public class SyntaxAnalyzerAndParser {
     private static String extractLabel(String line){
         String toReturn = "";
         for (char c : line.toCharArray()){
-            if(c!='%'|| c!=':'){
+            String str = "";
+            str= str+c;
+            if(!(str.equals("%")|| str.equals(":"))){
                 toReturn=toReturn+c;
             }
             if (c==';'){

@@ -7,6 +7,7 @@ public class TypeComparator {
      * @return
      */
     public static int type(String operation) {
+        operation=operation.toLowerCase();
         switch (operation) {
             case "add":
             case "sub":
@@ -36,6 +37,7 @@ public class TypeComparator {
             case "vldh":
             case "vstw":
             case "vsth":
+            case "vstb":
                 return 4;
             default:
                 return -1;

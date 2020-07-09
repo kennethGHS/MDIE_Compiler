@@ -29,6 +29,8 @@ public class BitSetter {
         try {
             operand.replace("[", "");
             switch (operand) {
+                case "R0":
+                    return intToBitSet(0, 5);
                 case "R1":
                     return intToBitSet(1, 5);
                 case "R2":
@@ -49,7 +51,7 @@ public class BitSetter {
                     return intToBitSet(9, 5);
                 case "R10":
                     return intToBitSet(10, 5);
-                case "R11":
+                case "VP":
                     return intToBitSet(11, 5);
                 case "IC":
                     return intToBitSet(12, 5);
@@ -114,32 +116,35 @@ public class BitSetter {
     public static ArrayList<BitSet> setOperation(String operand) {
         BitSet instructBit = new BitSet(5);
         BitSet aluBit = new BitSet(3);
+        operand=operand.toLowerCase();
+
         try {
             switch (operand) {
                 case "add":
                     break;
                 case "addi":
-                    instructBit.set(1, true);
+                    instructBit.set(3, true);
+                    aluBit.set(0, true);
                     break;
                 case "sub":
-                    aluBit.set(2, true);
+                    aluBit.set(0, true);
                     break;
 
                 case "subi":
-                    instructBit.set(1, true);
-                    instructBit.set(4, true);
+                    instructBit.set(0, true);
+                    instructBit.set(3, true);
                     aluBit.set(2, true);
                     break;
                 case "mul":
                     aluBit.set(1, true);
                     break;
                 case "ldw":
-                    instructBit.set(3, true);
+                    instructBit.set(1, true);
                     break;
 
                 case "ldh":
-                    instructBit.set(3, true);
-                    instructBit.set(4, true);
+                    instructBit.set(0, true);
+                    instructBit.set(1, true);
                     break;
 
                 case "stw":
@@ -147,16 +152,16 @@ public class BitSetter {
                     break;
 
                 case "sth":
+                    instructBit.set(0, true);
                     instructBit.set(2, true);
-                    instructBit.set(4, true);
                     break;
 
                 case "jmp":
-                    instructBit.set(0, true);
+                    instructBit.set(4, true);
                     break;
 
                 case "jr":
-                    instructBit.set(3, true);
+                    instructBit.set(1, true);
                     instructBit.set(2, true);
                     break;
 
@@ -172,14 +177,13 @@ public class BitSetter {
                     break;
 
                 case "bgt":
+                    instructBit.set(0, true);
                     instructBit.set(1, true);
                     instructBit.set(3, true);
-                    instructBit.set(1, true);
-                    instructBit.set(4, true);
                     break;
 
                 case "sl":
-                    aluBit.set(0);
+                    aluBit.set(2);
                     break;
 
 
@@ -190,41 +194,41 @@ public class BitSetter {
 
 
                 case "or":
-                    aluBit.set(0);
+                    aluBit.set(2);
                     aluBit.set(1);
                     break;
 
                 case "vmul":
                     aluBit.set(1);
-                    instructBit.set(0, true);
-                    instructBit.set(1, true);
+                    instructBit.set(3, true);
+                    instructBit.set(4, true);
                     break;
                 case "vsr":
                     aluBit.set(1);
                     aluBit.set(0);
                     aluBit.set(2);
-                    instructBit.set(0, true);
-                    instructBit.set(1, true);
+                    instructBit.set(3, true);
+                    instructBit.set(4, true);
                     break;
 
                 case "vsub":
-                    instructBit.set(0, true);
-                    instructBit.set(1, true);
+                    instructBit.set(4, true);
+                    instructBit.set(3, true);
                     aluBit.set(0);
                     aluBit.set(2);
                     break;
 
                 case "vcsub":
-                    instructBit.set(0, true);
                     instructBit.set(1, true);
                     instructBit.set(2, true);
                     instructBit.set(3, true);
+                    instructBit.set(4, true);
                     break;
 
                 case "vldw":
-                    instructBit.set(0, true);
                     instructBit.set(1, true);
                     instructBit.set(3, true);
+                    instructBit.set(4, true);
                     break;
 
                 case "vldh":
@@ -235,15 +239,21 @@ public class BitSetter {
                     break;
 
                 case "vstw":
-                    instructBit.set(0, true);
-                    instructBit.set(1, true);
                     instructBit.set(2, true);
+                    instructBit.set(3, true);
+                    instructBit.set(4, true);
                     break;
 
                 case "vsth":
                     instructBit.set(0, true);
                     instructBit.set(1, true);
                     instructBit.set(2, true);
+                    instructBit.set(4, true);
+                    break;
+                case "vstb":
+                    instructBit.set(0, true);
+                    instructBit.set(2, true);
+                    instructBit.set(3, true);
                     instructBit.set(4, true);
                     break;
                 default:

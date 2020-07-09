@@ -1,9 +1,12 @@
 package com.FileManagement;
 
+import com.comparators.BitToHex;
+import com.containers.Instruction;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class ReadFile {
+public class FileManager {
     /**
      * Code for reading a picture
      *
@@ -32,12 +35,16 @@ public class ReadFile {
      * @param file all the lines in a file
      * @return an arraylist containing the lines
      */
-    private static ArrayList<String> filterLines(String file) {
+    public static ArrayList<String> filterLines(String file) {
         String[] list = file.split("\n");
         ArrayList<String> toReturn = new ArrayList<>();
         for (String line : list) {
             String lineSpace = line.trim();
-            if (lineSpace.charAt(0) != ';' || (!lineSpace.isEmpty())) {
+            if(line.isEmpty()){
+                continue;
+            }
+            String toCompare1 = "" + lineSpace.charAt(0);
+            if ( !(toCompare1.equals("\n") ||toCompare1.equals(";") || lineSpace.isEmpty())) {
                 toReturn.add(lineSpace);
             }
 
@@ -51,14 +58,26 @@ public class ReadFile {
      * @param filename
      * @return
      */
-    public static ArrayList<String> getFileLines(String filename) {
-        try {
+    public static ArrayList<String> getFileLines(String filename) throws IOException {
+
             String file = readFile(filename);
             ArrayList<String> fileLines = filterLines(file);
             return fileLines;
-        } catch (Exception e) {
-            return null;
+
+    }
+
+    public static void writeFile(String filename ) throws IOException {
+        File fileOut = new File("C:\\Users\\kenne\\OneDrive\\Desktop\\testOut.txt");
+        FileOutputStream fos = new FileOutputStream(fileOut);
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+        for (Instruction ins:Instruction.instList) {
+            bw.write(BitToHex.bitToHex(ins.bitSet));
+            bw.newLine();
         }
+
+        bw.close();
     }
 
 

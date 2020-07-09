@@ -24,18 +24,19 @@ public class ToBinConverter {
             try {
                 toAppend = BitSetter.setReg(parsedInstruction.get(i));
                 if (toAppend == null) {
-                    toAppend = BitSetter.intToBitSet(Integer.parseInt(parsedInstruction.get(i)), 0);
+                    toAppend = BitSetter.intToBitSet(Integer.parseInt(parsedInstruction.get(i)), 16);
                 }
             } catch (Exception e) {
                 int instructionNumber = Instruction.getFromLabel(parsedInstruction.get(i));
                 if (instructionNumber == -1) {
                     return null;
                 }
-                toAppend = BitSetter.intToBitSet(instructionNumber, 0);
+                toAppend = BitSetter.intToBitSet(instructionNumber, 27);
                 bitSetToReturn.add(toAppend);
                 return bitSetToReturn;
 
             }
+            System.out.println("El largo del operando es:"+ toAppend.length());
             bitSetToReturn.add(toAppend);
             i++;
         }
