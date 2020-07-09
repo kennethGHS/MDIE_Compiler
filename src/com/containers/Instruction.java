@@ -1,5 +1,7 @@
 package com.containers;
 
+import com.company.Main;
+import com.comparators.BitToHex;
 import com.comparators.ToBinConverter;
 import com.comparators.TypeComparator;
 import com.syntax_analisis.SyntaxAnalyzerAndParser;
@@ -150,21 +152,28 @@ public class Instruction {
     }
 
     private void setRDnRS1() {
-        BitSet RD = this.bitLine.get(2);
-        BitSet Rs1 = this.bitLine.get(3);
-        int beginIndex = 22;
-        int len = 5;
-        int i = 0;
-        while (i != len) {
-            this.bitSet.set(beginIndex + i, RD.get(i));
-            i++;
+        try {
 
+
+            BitSet RD = this.bitLine.get(2);
+            BitSet Rs1 = this.bitLine.get(3);
+            int beginIndex = 22;
+            int len = 5;
+            int i = 0;
+            while (i != len) {
+                this.bitSet.set(beginIndex + i, RD.get(i));
+                i++;
+
+            }
+            i = 0;
+            beginIndex = 17;
+            while (i != len) {
+                this.bitSet.set(beginIndex + i, Rs1.get(i));
+                i++;
+            }
         }
-        i = 0;
-        beginIndex = 17;
-        while (i != len) {
-            this.bitSet.set(beginIndex + i, Rs1.get(i));
-            i++;
+        catch (Exception e){
+            System.out.println(assemblyLine);
         }
 
     }
@@ -212,6 +221,10 @@ public class Instruction {
         int i = 0;
         BitSet imm = this.bitLine.get(4);
         int len = 16;
+        if (imm.length()>15){
+            this.error=true;
+            this.errorType="Inmediato supera el numero maximo de bytes";
+        }
         while (i != len) {
             this.bitSet.set(i + 1, imm.get(i));
             i++;
@@ -240,5 +253,11 @@ public class Instruction {
             this.bitSet.set(beginIndex + i, Rs1.get(i));
             i++;
         }
+    }
+    public static void printErrors(){
+        for (Instruction ins: Instruction.instList)
+            if(ins.error){
+                System.out.println("Error: " +ins.errorType + "\n" + "Linea:" + ins.line);
+            }
     }
 }

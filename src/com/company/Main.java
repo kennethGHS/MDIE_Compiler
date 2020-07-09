@@ -1,6 +1,7 @@
 package com.company;
 
 import com.FileManagement.FileManager;
+import com.comparators.BitSetter;
 import com.containers.Instruction;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class Main {
             printBits(inst.bitSet);
         }
         FileManager.writeFile(null);
+        printBits(BitSetter.intToBitSet(131072 ,16));
+        Instruction.printErrors();
 
     }
 
