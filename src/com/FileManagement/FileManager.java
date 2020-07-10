@@ -1,8 +1,8 @@
 package com.FileManagement;
 
+import com.company.filechooser;
 import com.comparators.BitToHex;
 import com.containers.Instruction;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -40,11 +40,11 @@ public class FileManager {
         ArrayList<String> toReturn = new ArrayList<>();
         for (String line : list) {
             String lineSpace = line.trim();
-            if(line.isEmpty()){
+            if (line.isEmpty()) {
                 continue;
             }
             String toCompare1 = "" + lineSpace.charAt(0);
-            if ( !(toCompare1.equals("\n") ||toCompare1.equals(";") || lineSpace.isEmpty())) {
+            if (!(toCompare1.equals("\n") || toCompare1.equals(";") || lineSpace.isEmpty())) {
                 toReturn.add(lineSpace);
             }
 
@@ -60,25 +60,30 @@ public class FileManager {
      */
     public static ArrayList<String> getFileLines(String filename) throws IOException {
 
-            String file = readFile(filename);
-            ArrayList<String> fileLines = filterLines(file);
-            return fileLines;
+        String file = readFile(filename);
+        ArrayList<String> fileLines = filterLines(file);
+        return fileLines;
 
     }
 
-    public static void writeFile(String filename ) throws IOException {
-        File fileOut = new File("C:\\Users\\kenne\\OneDrive\\Desktop\\testOut.txt");
+    public static void writeFile(String filename) throws IOException {
+        File fileOut = new File(filename);
         FileOutputStream fos = new FileOutputStream(fileOut);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        if (!(Instruction.isError())) {
+            for (Instruction ins : Instruction.instList) {
+                bw.write(BitToHex.bitToHex(ins.bitSet));
+                bw.newLine();
+            }
 
-        for (Instruction ins:Instruction.instList) {
-            bw.write(BitToHex.bitToHex(ins.bitSet));
-            bw.newLine();
+            bw.close();
+            return;
         }
-
+        bw.write(Instruction.returnErrors());
+        bw.newLine();
+        filechooser.error.setText("Error: ver archivo generado para mas informacion");
         bw.close();
     }
-
 
 }

@@ -73,7 +73,14 @@ public class Instruction {
         if (this.assemblyLine.equals("stall")){
             this.bitLine=null;
         }
-        this.bitLine = ToBinConverter.getBitSet(this.parsedLine);
+        try {
+            this.bitLine = ToBinConverter.getBitSet(this.parsedLine);
+
+        }
+        catch (Exception e){
+            this.error = true;
+            this.errorType = "Error al parseo de la linea, caracter invalido";
+        }
     }
 
     /**
@@ -99,6 +106,9 @@ public class Instruction {
      */
     public void setBitSet() {
         this.bitSet = new BitSet(32);
+        if (error){
+            return;
+        }
         if (this.assemblyLine.equals("stall")){
             return;
         }
@@ -257,7 +267,24 @@ public class Instruction {
     public static void printErrors(){
         for (Instruction ins: Instruction.instList)
             if(ins.error){
-                System.out.println("Error: " +ins.errorType + "\n" + "Linea:" + ins.line);
+                System.out.println("Error: " +ins.errorType + "\n" + "Linea:" + ins.line +":"+ ins.assemblyLine);
             }
+    }
+    public static String returnErrors(){
+        String toReturn = "";
+        for (Instruction ins: Instruction.instList)
+            if(ins.error){
+                toReturn = toReturn + "Error: " +ins.errorType + "\n" + "Linea:" + ins.line +":"+ ins.assemblyLine +"\n";
+            }
+        return toReturn;
+
+    }
+    public static boolean isError(){
+        for (Instruction ins:Instruction.instList){
+            if (ins.error){
+                return true;
+            }
+        }
+        return false;
     }
 }

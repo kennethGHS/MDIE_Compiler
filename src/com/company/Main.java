@@ -2,26 +2,27 @@ package com.company;
 
 import com.FileManagement.FileManager;
 import com.comparators.BitSetter;
+import com.comparators.BitToHex;
 import com.containers.Instruction;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
+import javax.swing.filechooser.*;
 
 import static com.syntax_analisis.SyntaxAnalyzerAndParser.parseTotalFile;
 
 public class Main {
+    static JLabel l;
+
+    // a default constructor
 
     public static void main(String[] args) throws IOException {
+        filechooser.execute();
 
-        ArrayList<String> lines = FileManager.getFileLines("C:\\Users\\kenne\\OneDrive\\Desktop\\txtPrueba.txt");
-        System.out.println(lines);
-        parseTotalFile(lines);
-        for (Instruction inst:Instruction.instList){
-            printBits(inst.bitSet);
-        }
-        FileManager.writeFile(null);
-        printBits(BitSetter.intToBitSet(131072 ,16));
+
+       // printBits(BitSetter.intToBitSet(131072 ,16));
         Instruction.printErrors();
 
     }
@@ -45,4 +46,5 @@ public class Main {
         System.out.println(str);
 
     }
+
 }
