@@ -155,10 +155,18 @@ public class Instruction {
     }
 
     private void parseVType() {
+        if(this.parsedLine.get(0).toLowerCase().equals("vstb")){
+            this.setRS1Special();
+            this.setRs2Special();
+            this.setOpCode();
+            this.setALUop();
+            return;
+        }
         this.setRDnRS1();
         this.setRs2();
         this.setOpCode();
         this.setALUop();
+
     }
 
     private void setRDnRS1() {
@@ -187,6 +195,23 @@ public class Instruction {
         }
 
     }
+    private void setRS1Special() {
+        try {
+            BitSet Rs1 = this.bitLine.get(1);
+            int beginIndex = 22;
+            int len = 5;
+            int i = 0;
+            beginIndex = 17;
+            while (i != len) {
+                this.bitSet.set(beginIndex + i, Rs1.get(i));
+                i++;
+            }
+        }
+        catch (Exception e){
+            System.out.println(assemblyLine);
+        }
+
+    }
 
     private void setOpCode() {
         BitSet opCode = this.bitLine.get(0);
@@ -198,7 +223,22 @@ public class Instruction {
             i++;
         }
     }
+    private void setRs2Special(){
+        BitSet Rs1;
+        try {
+            Rs1 = this.bitLine.get(2);
+        } catch (Exception e) {
+            return;
+        }
+        int i = 0;
+        int len = 5;
+        int offset = 12;
+        while (i != len) {
+            this.bitSet.set(offset + i, Rs1.get(i));
+            i++;
 
+        }
+    }
     private void setRs2() {
         BitSet Rs1;
         try {
