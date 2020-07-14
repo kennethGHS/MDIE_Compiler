@@ -119,7 +119,7 @@ public class filechooser extends JFrame implements ActionListener {
             j.setDialogTitle("Select a .txt file");
 
             // only allow files of .txt extension
-            FileNameExtensionFilter restrict = new FileNameExtensionFilter(".txt and .mdie", "txt","mdie");
+            FileNameExtensionFilter restrict = new FileNameExtensionFilter(".txt and .mdie", "txt","mide");
             j.addChoosableFileFilter(restrict);
 
             // invoke the showsOpenDialog function to show the save dialog
