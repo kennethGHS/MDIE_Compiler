@@ -26,7 +26,9 @@ public class FileManager {
             sb.append("\n");
         }
         fr.close();    //closes the stream and release the resources
-        return sb.toString();
+        String toReturn = sb.toString().toUpperCase().replace("CALL","ADDI RA,R0,@ \n JMP ");
+
+        return toReturn;
     }
 
     /**

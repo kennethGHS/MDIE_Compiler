@@ -74,7 +74,7 @@ public class Instruction {
             this.bitLine=null;
         }
         try {
-            this.bitLine = ToBinConverter.getBitSet(this.parsedLine);
+            this.bitLine = ToBinConverter.getBitSet(this.parsedLine,this);
 
         }
         catch (Exception e){
