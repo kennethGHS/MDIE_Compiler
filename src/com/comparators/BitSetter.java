@@ -215,7 +215,6 @@ public class BitSetter {
                     instructBit.set(4, true);
                     instructBit.set(3, true);
                     aluBit.set(0);
-                    aluBit.set(2);
                     break;
 
                 case "vcsub":
@@ -223,6 +222,7 @@ public class BitSetter {
                     instructBit.set(2, true);
                     instructBit.set(3, true);
                     instructBit.set(4, true);
+                    aluBit.set(0);
                     break;
 
                 case "vldw":
