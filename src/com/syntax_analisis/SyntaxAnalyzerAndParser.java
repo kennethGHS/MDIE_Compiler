@@ -82,6 +82,14 @@ public class SyntaxAnalyzerAndParser {
             label= extractLabel(line);
             continue;
             }
+            if (line.toLowerCase().contains("jr")){
+                new Instruction("stall",false,label,i);
+                i++;
+                new Instruction("stall",false,label,i);
+                i++;
+                new Instruction("stall",false,label,i);
+                i++;
+            }
             new Instruction(line,isLabel,label,i);
             isLabel=false;
             label="";
