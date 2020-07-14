@@ -156,6 +156,7 @@ public class Instruction {
 
     private void parseVType() {
         if(this.parsedLine.get(0).toLowerCase().equals("vstb")){
+            System.out.println("LOLOLOLOL");
             this.setRS1Special();
             this.setRs2Special();
             this.setOpCode();
@@ -197,7 +198,7 @@ public class Instruction {
     }
     private void setRS1Special() {
         try {
-            BitSet Rs1 = this.bitLine.get(1);
+            BitSet Rs1 = this.bitLine.get(2);
             int beginIndex = 22;
             int len = 5;
             int i = 0;
@@ -226,7 +227,7 @@ public class Instruction {
     private void setRs2Special(){
         BitSet Rs1;
         try {
-            Rs1 = this.bitLine.get(2);
+            Rs1 = this.bitLine.get(3);
         } catch (Exception e) {
             return;
         }
