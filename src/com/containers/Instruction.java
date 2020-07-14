@@ -134,6 +134,13 @@ public class Instruction {
             this.setOpCode();
             this.setRs1();
             return;
+        }        if(this.parsedLine.get(0).toLowerCase().equals("stw")){
+
+            this.setRS1Special();
+            this.setRs2Special();
+            this.setOpCode();
+            this.setALUop();
+            return;
         }
         this.setRDnRS1();
         this.setRs2();
