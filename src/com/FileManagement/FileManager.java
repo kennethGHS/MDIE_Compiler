@@ -71,11 +71,14 @@ public class FileManager {
         FileOutputStream fos = new FileOutputStream(fileOut);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        bw.write("DEPTH = 256;\nWIDTH = 32;\nADDRESS_RADIX = DEC;\nDATA_RADIX = HEX;\nCONTENT\nBEGIN\n");
         if (!(Instruction.isError())) {
             for (Instruction ins : Instruction.instList) {
-                bw.write(BitToHex.bitToHex(ins.bitSet));
+                bw.write(ins.line+ " : "+BitToHex.bitToHex(ins.bitSet) +";");
                 bw.newLine();
             }
+            int lastIndex = Instruction.instList.size();
+            bw.write("["+lastIndex + "..255] : 0; \n END;");
 
             bw.close();
             return;
