@@ -19,7 +19,7 @@ public class TypeComparator {
             case "jr":
             case "sl":
             case "and":
-            case "or":
+            case "sr":
                 return 1;
             case "addi":
             case "subi":

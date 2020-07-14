@@ -193,7 +193,7 @@ public class BitSetter {
                     break;
 
 
-                case "or":
+                case "sr":
                     aluBit.set(2);
                     aluBit.set(1);
                     break;
