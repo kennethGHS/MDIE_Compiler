@@ -231,7 +231,7 @@ public class Instruction {
         int i = 0;
         BitSet imm = this.bitLine.get(4);
         int len = 16;
-        if (imm.length()>15){
+        if (imm.length()>16){
             this.error=true;
             this.errorType="Inmediato supera el numero maximo de bytes";
         }
