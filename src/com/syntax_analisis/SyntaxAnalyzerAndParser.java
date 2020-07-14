@@ -91,6 +91,8 @@ public class SyntaxAnalyzerAndParser {
                 i++;
                 new Instruction("stall",false,label,i);
                 i++;
+                new Instruction("stall",false,label,i);
+                i++;
             }
         }
         for (Instruction inst : Instruction.instList){
