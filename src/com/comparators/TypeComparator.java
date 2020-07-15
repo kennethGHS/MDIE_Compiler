@@ -34,6 +34,7 @@ public class TypeComparator {
             case "vsub":
             case "vcsub":
             case "vldw":
+            case "vadd":
             case "vldh":
             case "vstw":
             case "vsth":

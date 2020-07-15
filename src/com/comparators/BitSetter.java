@@ -256,6 +256,12 @@ public class BitSetter {
                     instructBit.set(3, true);
                     instructBit.set(4, true);
                     break;
+                case "vadd": //011
+                    instructBit.set(3, true);
+                    instructBit.set(4, true);
+                    aluBit.set(0);
+                    aluBit.set(1);
+                    break;
                 default:
                     instructBit = null;
                     aluBit = null;
