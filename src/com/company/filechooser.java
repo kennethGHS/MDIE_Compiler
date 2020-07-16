@@ -27,6 +27,7 @@ public class filechooser extends JFrame implements ActionListener {
 
     public static void execute()
     {
+
         // frame to contains GUI elements
         JFrame f = new JFrame("MDIE compiler");
 
@@ -141,7 +142,6 @@ public class filechooser extends JFrame implements ActionListener {
                 try {
                     compile();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
 
             }
